@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var finalNumber: String = "0"
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea()
@@ -15,19 +17,26 @@ struct ContentView: View {
                 Spacer()
                 HStack{
                     Spacer()
-                    Text("50,2502")
+                    Text(finalNumber)
                         .padding()
                         .foregroundColor(.white)
                         .font(.system(size: 73))
                 }
-                HStack{
-                    Text("7")
-                        .frame(width: 80,
-                               height: 80)
-                        .background(.gray)
-                        .cornerRadius(40)
-                        .foregroundColor(.white)
-                        .font(.system(size: 33))
+                HStack {
+                    Button(action: {
+                        if finalNumber == "0" {
+                            finalNumber = "7"
+                        } else {
+                            finalNumber += "7"
+                        }
+                    }) {
+                        Text("7")
+                            .frame(width: 80, height: 80)
+                            .background(Color("NumberSet")) // Correct usage
+                            .cornerRadius(40)
+                            .foregroundColor(.white)
+                            .font(.system(size: 33))
+                    }
                     Text("8")
                         .frame(width: 80,
                                height: 80)
