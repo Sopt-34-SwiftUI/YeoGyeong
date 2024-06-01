@@ -10,6 +10,15 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var finalNumber: String = "0"
+    
+    private let buttonNumber: [[String]] = [
+        ["C","/","%","$"],
+        ["7","8","9","X"],
+        ["4","5","6","-"],
+        ["1","2","3","+"],
+        ["0","0",",","="]
+    ]
+    
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea()
@@ -22,178 +31,33 @@ struct ContentView: View {
                         .foregroundColor(.white)
                         .font(.system(size: 73))
                 }
-                
-                HStack {
-                    Button
-                    {
-                        finalNumber = "0"
-                    } label: {
-                            Text("C")
-                                .frame(width: 80, height: 80)
-                                .background(Color("NumberSet"))
-                                .cornerRadius(40)
-                                .foregroundColor(.white)
-                                .font(.system(size: 33))
-                        }
-                    Text("/")
-                        .frame(width: 80, height: 80)
-                        .background(Color("NumberSet"))
-                        .cornerRadius(40)
-                        .foregroundColor(.white)
-                        .font(.system(size: 33))
-                    
-                    Text("%")
-                        .frame(width: 80, height: 80)
-                        .background(Color("NumberSet"))
-                        .cornerRadius(40)
-                        .foregroundColor(.white)
-                        .font(.system(size: 33))
-                    
-                    Text("$")
-                        .frame(width: 80, height: 80)
-                        .background(Color(.orange))
-                        .cornerRadius(40)
-                        .foregroundColor(.white)
-                        .font(.system(size: 33))
-                    }
-                    
-                    
+                ForEach(buttonNumber, id:\.self) {
+                    line in
                     HStack {
-                        Button(action: {
-                            if finalNumber == "0" {
-                                finalNumber = "7"
-                            } else {
-                                finalNumber += "7"
+                        ForEach(line, id:\.self){
+                            row in
+                            Button {
+                                if finalNumber == "0"{
+                                    finalNumber = "7"
+                                }else {
+                                    finalNumber += "7"
+                                }
+                            } label: {
+                                Text(row)
+                                    .frame(width: 80,
+                                           height: 80)
+                                    .background(.gray)
+                                    .cornerRadius(40)
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 33))
                             }
-                        }) {
-                            Text("7")
-                                .frame(width: 80, height: 80)
-                                .background(Color("NumberSet"))
-                                .cornerRadius(40)
-                                .foregroundColor(.white)
-                                .font(.system(size: 33))
                         }
-                        Text("8")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        Text("9")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        Text("X")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.orange)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
                     }
-                    
-                    HStack{
-                        Text("4")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        Text("5")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        Text("6")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        Text("-")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.orange)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        
-                    }
-                    HStack{
-                        Text("1")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        Text("2")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        Text("3")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        Text("+")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.orange)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                    }
-                    
-                    HStack{
-                        Text("0")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        Text("0")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        Text(".")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                        Text("=")
-                            .frame(width: 80,
-                                   height: 80)
-                            .background(.orange)
-                            .cornerRadius(40)
-                            .foregroundColor(.white)
-                            .font(.system(size: 33))
-                    }
-                    
                 }
             }
         }
     }
-    
-    #Preview {
-        ContentView()
-    }
+}
+            #Preview {
+                ContentView()
+            }
